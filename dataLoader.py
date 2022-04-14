@@ -65,7 +65,7 @@ def Split_data(data_name, train_rate =0.8, valid_rate = 0.1, random_seed = 300, 
                     userlist.append(u2idx[user])
                     timestamplist.append(float(timestamp))
 
-            if len(userlist) > 1 and len(userlist)<=300:
+            if len(userlist) > 1 and len(userlist)<=500:
                 if with_EOS:
                     userlist.append(Constants.EOS)
                     timestamplist.append(Constants.EOS)
