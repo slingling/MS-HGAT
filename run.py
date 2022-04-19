@@ -28,9 +28,9 @@ metric = Metrics()
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-data_name', default='android')
-parser.add_argument('-epoch', type=int, default=5) 
-parser.add_argument('-batch_size', type=int, default=1 )
+parser.add_argument('-data_name', default='twitter')
+parser.add_argument('-epoch', type=int, default=50)
+parser.add_argument('-batch_size', type=int, default=64)
 parser.add_argument('-d_model', type=int, default=64)
 parser.add_argument('-initialFeatureSize', type=int, default=64)
 parser.add_argument('-train_rate', type=float, default=0.8)
@@ -98,7 +98,7 @@ def train_epoch(model, training_data, graph, hypergraph_list, loss_func, optimiz
 
 def train_model(MSHGAT, data_path):
     # ========= Preparing DataLoader =========#
-    user_size, total_cascades, timestamps, train, valid, test = Split_data(data_path, opt.train_rate, opt.valid_rate, load_dict=False)
+    user_size, total_cascades, timestamps, train, valid, test = Split_data(data_path, opt.train_rate, opt.valid_rate, load_dict=True)
     
     train_data = DataLoader(train, batch_size=opt.batch_size, load_dict=True, cuda=False)
     valid_data = DataLoader(valid, batch_size=opt.batch_size, load_dict=True, cuda=False)
