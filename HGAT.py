@@ -103,7 +103,7 @@ class HGNN_ATT(nn.Module):
         self.fus1 = Fusion(output_size)
         
     def forward(self, x, hypergraph_list):
-        root_emb =  F.embedding(hypergraph_list[1].cuda(), x) 
+        root_emb =  F.embedding(hypergraph_list[1].cuda(), x)
         
         hypergraph_list = hypergraph_list[0]
         embedding_list = {}
@@ -113,7 +113,7 @@ class HGNN_ATT(nn.Module):
             sub_node_embed = F.dropout(sub_node_embed, self.dropout, training=self.training)
             
             if self.is_norm:
-                sub_node_embed = self.batch_norm1(sub_node_embed)       
+                sub_node_embed = self.batch_norm1(sub_node_embed)
                 sub_edge_embed = self.batch_norm1(sub_edge_embed)
             
             x = self.fus1(x, sub_node_embed)
@@ -202,7 +202,8 @@ class MSHGAT(nn.Module):
                 
                 dyemb += sub_emb
                 cas_emb += sub_cas
-                
+        #dyemb = self.fus2(dyemb,cas_emb)
+
         diff_embed = torch.cat([dyemb, order_embed], dim=-1).cuda()     
         fri_embed = torch.cat([F.embedding(input.cuda(), hidden.cuda()), order_embed], dim =-1).cuda()
         
