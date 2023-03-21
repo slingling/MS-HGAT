@@ -37,7 +37,7 @@ def get_previous_user_mask(seq, user_size):
     ans_tmp = torch.zeros(seq.size(0), seq.size(1), user_size)
     if seq.is_cuda:
         ans_tmp = ans_tmp.cuda()
-    masked_seq = ans_tmp.scatter_(2, masked_seq.long(), float('-1000'))
+    masked_seq = ans_tmp.scatter_(2, masked_seq.long(), float(-1000))
     masked_seq = Variable(masked_seq, requires_grad=False)
     # print("masked_seq ",masked_seq.size())
     return masked_seq.cuda()
